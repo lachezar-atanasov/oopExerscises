@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BoardR.Classes
 {
-    public class Board
+    public static class Board
     {
         public static List<BoardItem> items = new List<BoardItem>();
     }

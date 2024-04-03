@@ -8,23 +8,26 @@ namespace BoardR.Classes
 {
     public class BoardItem
     {
-
         public string title;
         public DateTime dueDate;
         public Status status;
+        
 
         public BoardItem(string title, DateTime dueDate)
         {
             bool isValidTitle = title.Length >= 5 && title.Length <= 30;
             bool isValidDate = dueDate > DateTime.Now;
+
             if (isValidTitle)
             {
                 this.title = title;
             }
+
             if (isValidDate)
             {
                 this.dueDate = dueDate;
             }
+
             status = Status.Open;
         }
         public string ViewInfo()
@@ -43,7 +46,8 @@ namespace BoardR.Classes
 
         public void AdvanceStatus()
         {
-            if ((int)status == Enum.GetNames(typeof(Status)).Length - 1)
+            bool isLastStatusElement = (int)status == Enum.GetNames(typeof(Status)).Length - 1;
+            if (isLastStatusElement)
             {
                 return;
             }
