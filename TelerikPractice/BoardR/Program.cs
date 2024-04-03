@@ -1,4 +1,5 @@
 ﻿using System;
+using BoardR.Classes;
 
 namespace BoardR
 {
@@ -23,64 +24,5 @@ namespace BoardR
                 Console.WriteLine(boardItem.ViewInfo());
             }
         }
-    }
-
-    public enum Status
-    {
-        Open,
-        Todo,
-        InProgress,
-        Done,
-        Verified
-    }
-
-    public class BoardItem
-    {
-        public string title;
-        public DateTime dueDate;
-        public Status status;
-
-        public BoardItem(string title, DateTime dueDate)
-        {
-            bool isValidTitle = (title.Length >= 5 && title.Length <= 30);
-            bool isValidDate = (dueDate > DateTime.Now);
-            if (isValidTitle)
-            {
-                this.title = title;
-            }
-            if (isValidDate)
-            {
-                this.dueDate = dueDate;
-            }
-            this.status = Status.Open;
-        }
-        public string ViewInfo()
-        {
-            return $"{title}, [{status}|{dueDate.ToString("dd-MM-yyyy")}]";
-        }
-
-        public void RevertStatus()
-        {
-            if (status==0)
-            {
-                return;
-            }
-            status--;
-        }
-
-        public void AdvanceStatus()
-        {
-            if ((int)status == Enum.GetNames(typeof(Status)).Length-1)
-            {
-                return;
-            }
-            status++;
-        }
-    }
-
-    public class Board
-    {
-        public static List<BoardItem> items = new List<BoardItem>();
-       
     }
 }
