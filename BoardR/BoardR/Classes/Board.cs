@@ -8,6 +8,21 @@ namespace BoardR.Classes
 {
     public static class Board
     {
-        public static List<BoardItem> items = new List<BoardItem>();
+        private static List<BoardItem> items = new List<BoardItem>();
+        public static int TotalItems 
+        {
+            get
+            {
+                return items.Count;
+            }
+        }
+        public static void AddItem(BoardItem item)
+        {
+            if (items.Contains(item))
+            {
+                throw new InvalidOperationException("item already exists");
+            }
+            items.Add(item);
+        }
     }
 }
