@@ -15,7 +15,6 @@ namespace BoardR.Classes
         private Status status;
         private readonly List<EventLog> logs = new List<EventLog>();
         private const string dateTimeFormat = "dd-MM-yyyy";
-
         public BoardItem(string title, DateTime dueDate)
         {
             Title = title;

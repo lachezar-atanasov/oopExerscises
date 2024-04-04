@@ -7,20 +7,14 @@ using System.Threading.Tasks;
 namespace BoardR.Classes
 {
     public class EventLog
-    {
-        private readonly string description;
-        private readonly DateTime time;
-
+    { 
+        private DateTime time;
+        private string description;
+        
         public EventLog(string description)
         {
-            if (String.IsNullOrEmpty(description))
-            {
-                throw new ArgumentException("Description must not be null or empty. ");
-            }
-            this.description = description;
-
-
-            this.time = DateTime.Now;
+            Description = description;
+            Time = DateTime.Now;
         }
         public string Description
         {
@@ -28,12 +22,24 @@ namespace BoardR.Classes
             {
                 return description;
             }
+            private set
+            {
+                if (String.IsNullOrEmpty(description))
+                {
+                    throw new ArgumentException("Description must not be null or empty. ");
+                }
+                this.description = value;
+            }
         }
         public DateTime Time
         {
             get
             {
                 return time;
+            }
+            private set
+            {
+                this.time = value;
             }
         }
 
