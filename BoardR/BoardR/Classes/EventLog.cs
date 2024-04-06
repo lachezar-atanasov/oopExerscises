@@ -24,7 +24,7 @@ namespace BoardR.Classes
             }
             private set
             {
-                if (String.IsNullOrEmpty(description))
+                if (String.IsNullOrEmpty(value))
                 {
                     throw new ArgumentException("Description must not be null or empty. ");
                 }
