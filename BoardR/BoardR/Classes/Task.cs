@@ -10,9 +10,7 @@ namespace BoardR.Classes
 {
     public class Task: BoardItem
     {
-        private string title;
         private string assignee;
-        public string Title { get; set; }
         public string Assignee
         {
             get => assignee;
@@ -33,13 +31,10 @@ namespace BoardR.Classes
                 assignee = value;
             }
         }
-        public DateTime DueDate { get; set; }
 
         public Task(string title, string assignee, DateTime dueDate):base(title,dueDate, Status.Todo)
         {
-            Title = title;
             Assignee = assignee; 
-            DueDate = dueDate;
             base.AddLog($"Created Task: '{this.ViewInfo()}'");
         }
     }
