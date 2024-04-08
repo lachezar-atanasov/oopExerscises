@@ -15,14 +15,17 @@ namespace BoardR.Classes
         private Status status;
         private readonly List<EventLog> logs = new List<EventLog>();
         private const string dateTimeFormat = "dd-MM-yyyy";
-        public BoardItem(string title, DateTime dueDate)
+        public BoardItem(string title, DateTime dueDate, bool executeLogging = true)
         {
             Title = title;
             DueDate = dueDate;
             status = Status.Open;
-            //logs.Add(new EventLog($"Item created: '{this.ViewInfo()}'"));
+            if (executeLogging)
+            {
+                logs.Add(new EventLog($"Item created: '{this.ViewInfo()}'"));
+            }
         }
-        public BoardItem(string title, DateTime dueDate,Status status):this(title, dueDate)
+        public BoardItem(string title, DateTime dueDate,Status status, bool executeLogging = false) :this(title, dueDate, false)
         {
             this.status = status;
         }

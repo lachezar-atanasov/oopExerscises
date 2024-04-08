@@ -8,8 +8,26 @@ namespace BoardR.Classes
 {
     public class Issue : BoardItem
     {
-        public Issue(string title, DateTime dueDate) : base(title, dueDate)
+        private string description;
+        public Issue(string title, string description, DateTime dueDate) : base(title, dueDate, Status.Open)
         {
+            Description = description;
+            base.AddLog($"Created Issue: '{this.ViewInfo()}. Description: {this.description}'");
+        }
+        public string Description
+        {
+            get => description;
+            private set
+            {
+                if (value == null) 
+                {
+                    description = "No description";
+                }
+                else
+                {
+                    description = value;
+                }
+            }
         }
     }
 }
