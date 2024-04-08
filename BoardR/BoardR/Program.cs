@@ -1,5 +1,4 @@
-﻿using System;
-using BoardR.Classes;
+﻿using BoardR.Classes;
 
 namespace BoardR
 {
@@ -7,7 +6,11 @@ namespace BoardR
     {
         static void Main(string[] args)
         {
-
+            var task = new Classes.Task("Test the application flow", "Peter", DateTime.Now.AddDays(1));
+            task.AdvanceStatus();
+            task.AdvanceStatus();
+            task.Assignee = "George";
+            Console.WriteLine(task.ViewHistory());
         }
     }
 }

@@ -20,7 +20,11 @@ namespace BoardR.Classes
             Title = title;
             DueDate = dueDate;
             status = Status.Open;
-            logs.Add(new EventLog($"Item created: '{this.ViewInfo()}'"));
+            //logs.Add(new EventLog($"Item created: '{this.ViewInfo()}'"));
+        }
+        public BoardItem(string title, DateTime dueDate,Status status):this(title, dueDate)
+        {
+            this.status = status;
         }
 
         public string Title
@@ -103,6 +107,10 @@ namespace BoardR.Classes
                 return;
             }
             logs.Add(new EventLog($"Status changed from {status} to {++status}"));
+        }
+        public void AddLog(string message)
+        {
+            logs.Add(new EventLog(message));
         }
         public string ViewHistory()
         {
