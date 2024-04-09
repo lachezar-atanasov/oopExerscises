@@ -12,6 +12,10 @@ namespace BoardR.Classes
         public Issue(string title, string description, DateTime dueDate) : base(title, dueDate, Status.Open)
         {
             Description = description;
+            LogOnCreate();
+        }
+        protected override void LogOnCreate()
+        {
             base.AddLog($"Created Issue: '{this.ViewInfo()}. Description: {this.description}'");
         }
         public string Description

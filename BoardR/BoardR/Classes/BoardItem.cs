@@ -15,17 +15,14 @@ namespace BoardR.Classes
         private Status status;
         private readonly List<EventLog> logs = new List<EventLog>();
         private const string dateTimeFormat = "dd-MM-yyyy";
-        public BoardItem(string title, DateTime dueDate, bool executeLogging = true)
+        public BoardItem(string title, DateTime dueDate)
         {
             Title = title;
             DueDate = dueDate;
             status = Status.Open;
-            if (executeLogging)
-            {
-                logs.Add(new EventLog($"Item created: '{this.ViewInfo()}'"));
-            }
+            LogOnCreate();
         }
-        public BoardItem(string title, DateTime dueDate,Status status, bool executeLogging = false) :this(title, dueDate, false)
+        public BoardItem(string title, DateTime dueDate,Status status) :this(title, dueDate)
         {
             this.status = status;
         }
@@ -86,6 +83,11 @@ namespace BoardR.Classes
                 // return the value of the status field
                 return this.status;
             }
+        }
+
+        protected virtual void LogOnCreate()
+        {
+            logs.Add(new EventLog($"Item created: '{this.ViewInfo()}'"));
         }
         public string ViewInfo()
         {
