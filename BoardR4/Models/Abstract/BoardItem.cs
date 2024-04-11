@@ -1,6 +1,7 @@
 ﻿using System.Text;
+using BoardR.Models;
 
-namespace BoardR.Models
+namespace BoardR4.Models.Abstract
 {
     public abstract class BoardItem
     {
@@ -8,15 +9,15 @@ namespace BoardR.Models
         private string _title;
         private DateTime _dueDate;
         private readonly List<EventLog> _eventLog = new List<EventLog>();
-        
+
         public BoardItem(string title, DateTime dueDate)
         {
             Title = title;
             DueDate = dueDate;
             Status = Status.Open;
-            LogOnCreate();
         }
-        public BoardItem(string title, DateTime dueDate,Status status) :this(title, dueDate)
+        public BoardItem(string title, DateTime dueDate, Status status) 
+            : this(title, dueDate)
         {
             Status = status;
         }
@@ -24,68 +25,48 @@ namespace BoardR.Models
         {
             get
             {
-                return this._title;
+                return _title;
             }
             set
             {
                 EnsureValidTitle(value);
 
-                if (!String.IsNullOrEmpty(_title))
+                if (!string.IsNullOrEmpty(_title))
                 {
                     _eventLog.Add(new EventLog($"{nameof(Title)} changed from '{_title}' to '{value}'"));
                 }
-                
-                this._title = value;
+
+                _title = value;
             }
         }
         public DateTime DueDate
         {
             get
             {
-                return this._dueDate;
+                return _dueDate;
             }
             set
             {
                 EnsureValidDueDate(value);
 
-                if (!(_dueDate==default(DateTime)))
+                if (!(_dueDate == default))
                 {
                     _eventLog.Add(new EventLog($"{nameof(DueDate)} changed from " +
                         $"'{_dueDate.ToString(DateTimeFormat)}' to '{value.ToString(DateTimeFormat)}'"));
                 }
-                this._dueDate = value;
+                _dueDate = value;
             }
         }
         public Status Status
         {
             get; protected set;
         }
-
-        protected abstract void LogOnCreate();
         public string ViewInfo()
         {
             return $"{_title}, [{Status}|{_dueDate.ToString("dd-MM-yyyy")}]";
         }
-
-        public void RevertStatus()
-        {
-            if (Status == 0)
-            {
-                _eventLog.Add(new EventLog($"Can't revert, already at {Status}"));
-                return;
-            }
-            _eventLog.Add(new EventLog($"Status changed from {Status} to {--Status}"));
-        }
-        public void AdvanceStatus()
-        {
-            bool isLastStatusElement = (int)Status == Enum.GetNames(typeof(Status)).Length - 1;
-            if (isLastStatusElement)
-            {
-                _eventLog.Add(new EventLog($"Can't advance, already at {Status}"));
-                return;
-            }
-            _eventLog.Add(new EventLog($"Status changed from {Status} to {++Status}"));
-        }
+        public abstract void RevertStatus();
+        public abstract void AdvanceStatus();
         public void AddEventLog(string message)
         {
             _eventLog.Add(new EventLog(message));
@@ -93,7 +74,7 @@ namespace BoardR.Models
         public string ViewHistory()
         {
             StringBuilder sb = new StringBuilder();
-            foreach (EventLog log in _eventLog) 
+            foreach (EventLog log in _eventLog)
             {
                 sb.AppendLine(log.ViewInfo());
             }

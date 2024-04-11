@@ -1,4 +1,5 @@
 ﻿using BoardR.Models;
+using Task = BoardR.Models.Task;
 
 namespace BoardR
 {
@@ -6,10 +7,17 @@ namespace BoardR
     {
         static void Main(string[] args)
         {
-            var issue = new Issue("App flow tests?", "We need to test the App!", DateTime.Now.AddDays(1));
-            issue.AdvanceStatus();
-            issue.DueDate = issue.DueDate.AddDays(1);
-            Console.WriteLine(issue.ViewHistory());
+            var tomorrow = DateTime.Now.AddDays(1);
+            var task = new Task("App flow tests?", "Peter", tomorrow);
+
+            task.RevertStatus();
+            task.AdvanceStatus();
+            task.AdvanceStatus();
+            task.RevertStatus();
+            task.AdvanceStatus();
+            task.AdvanceStatus();
+
+            Console.WriteLine(task.ViewHistory());
         }
     }
 }

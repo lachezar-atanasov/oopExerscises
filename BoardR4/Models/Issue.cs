@@ -1,4 +1,6 @@
-﻿namespace BoardR.Models
+﻿using BoardR4.Models.Abstract;
+
+namespace BoardR.Models
 {
     public class Issue : BoardItem
     {
@@ -6,11 +8,29 @@
             : base(title, dueDate, Status.Open)
         {
             Description = description ?? "No description";
-        }
-        protected override void LogOnCreate()
-        {
-            base.AddEventLog($"Created Issue: '{this.ViewInfo()}. Description: {Description}'");
+            this.AddEventLog($"Created Issue: '{this.ViewInfo()}. Description: {Description}'");
         }
         public string Description { get; }
+
+        public override void RevertStatus()
+        {
+            if (Status == Status.Open)
+            {
+                this.AddEventLog($"Issue status already {Status}");
+                return;
+            }
+            Status = Status.Open;
+            this.AddEventLog($"Issue status set to {Status.Open}");
+        }
+        public override void AdvanceStatus()
+        {
+            if (Status == Status.Verified)
+            {
+                this.AddEventLog($"Issue status already {Status}");
+                return;
+            }
+            Status = Status.Verified;
+            this.AddEventLog($"Issue status set to {Status.Verified}");
+        }
     }
 }

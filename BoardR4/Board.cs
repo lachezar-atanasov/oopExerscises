@@ -1,4 +1,4 @@
-﻿using BoardR.Models;
+﻿using BoardR4.Models.Abstract;
 
 namespace BoardR4
 {
