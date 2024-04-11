@@ -10,7 +10,7 @@ namespace BoardR.Models
             :base(title,dueDate, Status.Todo)
         {
             Assignee = assignee;
-            this.AddEventLog($"Created Task: '{this.ViewInfo()}'");
+            this.AddEventLog($"Created Task: {this.ViewInfo()}");
         }
         public string Assignee
         {

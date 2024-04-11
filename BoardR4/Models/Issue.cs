@@ -8,7 +8,7 @@ namespace BoardR.Models
             : base(title, dueDate, Status.Open)
         {
             Description = description ?? "No description";
-            this.AddEventLog($"Created Issue: '{this.ViewInfo()}. Description: {Description}'");
+            this.AddEventLog($"Created Issue: {this.ViewInfo()}. Description: {Description}");
         }
         public string Description { get; }
 
