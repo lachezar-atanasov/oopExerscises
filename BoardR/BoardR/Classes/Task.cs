@@ -29,7 +29,6 @@ namespace BoardR.Classes
         public Task(string title, string assignee, DateTime dueDate):base(title,dueDate, Status.Todo)
         {
             Assignee = assignee;
-            LogOnCreate();
         }
 
         protected override void LogOnCreate()
