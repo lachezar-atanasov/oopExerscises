@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using BoardR.Models;
 
-namespace BoardR.Classes
+namespace BoardR4
 {
     public static class Board
     {
         private static List<BoardItem> items = new List<BoardItem>();
-        public static int TotalItems 
+        public static int TotalItems
         {
             get
             {
