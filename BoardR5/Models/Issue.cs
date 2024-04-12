@@ -11,7 +11,13 @@ namespace BoardR.Models
             this.AddEventLog($"Created Issue: {this.ViewInfo()}. Description: {Description}");
         }
         public string Description { get; }
-
+        public override string ViewInfo()
+        {
+            var baseInfo = base.ViewInfo();
+            baseInfo += " Description: " + Description;
+            // output info about the Type, the baseInfo, the Assignee
+            return baseInfo;
+        }
         public override void RevertStatus()
         {
             if (Status == Status.Open)

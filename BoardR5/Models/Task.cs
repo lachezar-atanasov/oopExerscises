@@ -26,6 +26,13 @@ namespace BoardR.Models
             }
         }
 
+        public override string ViewInfo()
+        { 
+            var baseInfo = base.ViewInfo();
+            baseInfo += " Assignee: "+ Assignee;
+            // output info about the Type, the baseInfo, the Assignee
+            return baseInfo;
+        }
         public override void RevertStatus()
         {
             if (Status == Status.Todo)

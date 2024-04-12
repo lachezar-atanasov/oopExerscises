@@ -14,11 +14,11 @@ namespace BoardR4
                 return items.Count;
             }
         }
-        public static void LogHistory()
+        public static void LogHistory(ILogger logger)
         {
             foreach (var item in items)
             {
-                Console.Write(item.ViewHistory());
+                logger.Log(item.ViewHistory());
             }
         }
         public static void AddItem(BoardItem item)

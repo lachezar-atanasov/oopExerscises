@@ -1,6 +1,6 @@
 ﻿namespace BoardR4.Loggers
 {
-    interface ILogger
+    public interface ILogger
     {
         void Log(string value);
     }

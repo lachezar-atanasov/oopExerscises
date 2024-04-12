@@ -61,9 +61,9 @@ namespace BoardR4.Models.Abstract
         {
             get; protected set;
         }
-        public string ViewInfo()
+        public virtual string ViewInfo()
         {
-            return $"'{_title}', [{Status}|{_dueDate.ToString("dd-MM-yyyy")}]";
+            return $"{this.GetType().Name}: " +  $"'{_title}', [{Status}|{_dueDate.ToString("dd-MM-yyyy")}]";
         }
         public abstract void RevertStatus();
         public abstract void AdvanceStatus();
